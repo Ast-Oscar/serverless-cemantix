@@ -51,7 +51,7 @@ async function handler(_req: Request): Promise<Response> {
     const result = await response.json();
 
     console.log(result);
-    return new Response(JSON.stringify({value: parseFloat(result.result)*(50) + 50}), {
+    return new Response(JSON.stringify({value: parseFloat(result.result)}), {
       status: 200,
 
       headers: {
