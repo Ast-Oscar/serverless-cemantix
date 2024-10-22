@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.119.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.119.0/http/server.ts/";
 
 function handlePreFlightRequest(): Response {
   return new Response("Preflight OK!", {
@@ -18,12 +18,9 @@ async function handler(_req: Request): Promise<Response> {
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
-  const urlParts = _req.url.split("/");
-  const lastPart = urlParts[urlParts.length - 1];
-
   const similarityRequestBody = JSON.stringify({
     word1: "banane",
-    word2: lastPart,
+    word2: _req.url,
   });
 
   const requestOptions = {
