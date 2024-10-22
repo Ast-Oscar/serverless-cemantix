@@ -22,7 +22,7 @@ async function handler(_req: Request): Promise<Response> {
   const lastPart = urlParts[urlParts.length - 1];
 
   const similarityRequestBody = JSON.stringify({
-    word1: "okok",
+    word1: "banane",
     word2: "supelec",
   });
 
