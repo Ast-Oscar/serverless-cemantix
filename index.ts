@@ -51,13 +51,15 @@ async function handler(_req: Request): Promise<Response> {
     const result = await response.json();
 
     console.log(result);
-    return new Response(JSON.stringify(result), {
+    return new Response(JSON.stringify({value: parseFloat(result.result)*(50) + 50}), {
       status: 200,
+
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "content-type",
       },
+      
     });
   } catch (error) {
     console.error("Fetch error:", error);
