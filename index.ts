@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.119.0/http/server.ts";
+import { serve } from "http://localhost:4200/";
 
 function handlePreFlightRequest(): Response {
   return new Response("Preflight OK!", {
@@ -10,16 +10,27 @@ function handlePreFlightRequest(): Response {
   });
 }
 
+function extractWordFromUrl(url: string): string | null {
+  const urlObj = new URL(url);
+  const word = urlObj.searchParams.get("word");
+  return word;
+}
+
 async function handler(_req: Request): Promise<Response> {
   if (_req.method == "OPTIONS") {
-    handlePreFlightRequest();
+    return handlePreFlightRequest();
+  }
+
+  const word = extractWordFromUrl(_req.url);
+  if (!word) {
+    return new Response("Word not provided", { status: 400 });
   }
 
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
   const similarityRequestBody = JSON.stringify({
-    word1: "centrale",
+    word1: word,
     word2: "supelec",
   });
 
