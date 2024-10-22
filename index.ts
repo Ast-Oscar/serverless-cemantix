@@ -19,11 +19,11 @@ async function handler(_req: Request): Promise<Response> {
   headers.append("Content-Type", "application/json");
 
   const urlParts = _req.url.split("/");
-  const lastPart = urlParts[urlParts.length - 1];
+  const guessWord = urlParts[urlParts.length - 1];
 
   const similarityRequestBody = JSON.stringify({
     word1: "banane",
-    word2: lastPart,
+    word2: guessWord,
   });
 
   const requestOptions = {
